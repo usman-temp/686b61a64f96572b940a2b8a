@@ -1,6 +1,12 @@
-{
-  "dependencies": {
-    ...existing dependencies,
-    "framer-motion": "^10.16.0"
-  }
+// START EDIT
+"devDependencies": {
+  "tailwindcss": "^3.3.2",
+  "autoprefixer": "^10.4.14",
+  "postcss": "^8.4.21"
+},
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start"
 }
+// END EDIT
