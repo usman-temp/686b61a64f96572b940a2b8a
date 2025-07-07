@@ -1,36 +1,48 @@
-import { motion } from 'framer-motion';
-import FriendCard from '@/components/FriendCard';
-import { friends } from '@/utils/friends';
+// START EDIT
+'use client';
+import React from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function FriendsPage() {
+const FriendsPage = () => {
+  const router = useRouter();
+
+  const handleCallClick = (id: string) => {
+    router.push(`/friends/${id}`);
+  };
+
+  const friends = [
+    { id: '1', name: 'Alice' },
+    { id: '2', name: 'Bob' }
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <motion.h1
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-4xl font-bold text-gray-900 mb-8"
-      >
-        My Friends
-      </motion.h1>
-
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: { opacity: 0 },
-          visible: {
-            opacity: 1,
-            transition: {
-              staggerChildren: 0.1
-            }
-          }
-        }}
-      >
-        {friends.map((friend) => (
-          <FriendCard key={friend.id} friend={friend} />
+    <main className="p-8">
+      <h1 className="text-4xl font-bold text-center mb-6 animate-fade-in">Friends List</h1>
+      <ul className="space-y-4">
+        {friends.map(friend => (
+          <li key={friend.id} className="bg-white shadow rounded p-4 flex justify-between items-center transition-transform transform hover:scale-105">
+            <span className="text-lg font-medium">{friend.name}</span>
+            <button
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              onClick={() => handleCallClick(friend.id)}
+            >
+              Call Friend
+            </button>
+          </li>
         ))}
-      </motion.div>
-    </div>
+      </ul>
+    </main>
   );
-}
+};
+
+export default FriendsPage;
+
+// Tailwind animation class (add in globals.css or configure if needed):
+// .animate-fade-in {
+//   animation: fadeIn 1s ease-in-out;
+// }
+// @keyframes fadeIn {
+//   from { opacity: 0; }
+//   to { opacity: 1; }
+// }
+// END EDIT
